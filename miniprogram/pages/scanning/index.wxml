@@ -2,7 +2,7 @@
 <view class="container">
 
   <!-- 用户 openid -->
-  <view class="userinfo">
+  <!-- <view class="userinfo">
     <block wx:if="{{canIUseOpenData}}" class="userinfo-opendata">
       <view class="userinfo-block-avatar" bindtap="bindViewTap">
         <open-data type="userAvatarUrl"></open-data>
@@ -31,27 +31,38 @@
     <view class="userinfo-nickname-wrapper">
       <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
     </view>
-  </view>
+  </view> -->
 
 
 <!-- 输入手机号 -->
-<view class="uploader" >
+<!-- <view class="uploader" >
     <view >
       <input class="uploader-input" type="number" bindinput='setInput' placeholder="输入手机号码"/>
-      <!-- <button type="primary" bindtap='create' >生成二维码</button> -->
     </view>
-    
-    <!-- <view class="uploader-container" wx:if="{{imgUrl}}">
-      
-    </view> -->
+  </view> -->
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" style="background-color: #ffffff;text-align:center;" type="number" bindinput='setInput' placeholder="输入手机号码" />
+      </view>
+    </view>
   </view>
+  <!-- <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" type="number" placeholder="这是一个数字输入框" />
+      </view>
+    </view>
+  </view> -->
 
   <view class="button-sp-area">
+    <view style="margin-top: 5%;">
       <button type="primary" bindtap='create' plain="true">生成二维码</button>
+    </view>
   </view>
 
-  <!-- 上传图片 -->
-  <view class="uploader">
+  <!-- 二维码 -->
+  <view class="uploader" style="/*text-align:center*/align-items:center;margin-right: 5%;">
    <canvas class="canvas-code" canvas-id="myQrcode" bindlongtap='save' style="background:#fff;width: 200px;height: 200px;"/>
   </view>
 

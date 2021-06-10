@@ -17,6 +17,7 @@ Page({
   },
 
   onLoad: function() {
+    console.log('a=',this.a())
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -168,5 +169,12 @@ Page({
             }
         }
     })
+  },
+
+  a: function getCurrentPageUrl() {
+    const pages = getCurrentPages()
+    const currentPage = pages[pages.length - 1]
+    const url = `/${currentPage.route}`
+    return url
   }
 })

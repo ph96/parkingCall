@@ -1,9 +1,8 @@
 //index.js
-import QRCode from '../../components/qcCode/weapp-qrcode.js'
 const app = getApp()
-var qrcode;
 
 Page({
+  
   data: {
     avatarUrl: './user-unlogin.png',
     userInfo: {},
@@ -13,20 +12,17 @@ Page({
     requestResult: '',
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl'), // 如需尝试获取用户信息可改为false
-    inputValue: '',
+    tal: '',
   },
 
   onLoad: function(e) {
-    var biaoshi = e.biaoshi;
-    // biaoshi = 1;
-    console.log('biaoshi=',biaoshi)
-    if(!biaoshi){//默认进入页面
-      this.skip('/pages/scanning/index');
-    } else if (biaoshi === 1) {//扫码后页面
-      var tal = e.tal;
-      tal = '111111111'
-      // 判断手机号是否为空
-      this.skip('/pages/createQrCode/index?tal='+tal);
+    // console.log('e.tal=',e.tal);
+    var tal = e.tal;
+    this.setData({
+      tal: tal,
+    });
+    if(tal && tal !== ''){
+      this.dial();
     }
     if (!wx.cloud) {
       wx.redirectTo({
@@ -54,15 +50,15 @@ Page({
       }
     })
   },
-
-  skip: function(path){
-    wx.navigateTo({
-      url: path,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+  dial: function () {
+    wx.makePhoneCall({
+      phoneNumber: this.data.tal,
+      success: function(e){
+        // console.log('拨打成功:e=',e);
+      },
+      fail: function(e){
+        // console.log('拨打失败:e=',e);
+      },
     })
-  },
-  
-
+  }
 })

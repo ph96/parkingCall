@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/scanning/index.wxml",
+    "pages/scanning/index",
+    "pages/createQrCode/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
