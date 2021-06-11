@@ -20,6 +20,22 @@
         font-size: 65px;
         text-align: center;
     }
+    .text{
+        height: 21px;
+        padding: 0 11px;
+        background: #eeeeee;
+        border-radius: 3px;
+        /*color: #fff;*/
+        display: inline-block;
+        text-decoration: none;
+        font-size: 12px;
+        outline: none;
+        width: 80%;
+        height: 6%;
+        margin: 8%;
+        font-size: 65px;
+        text-align: center;
+    }
     .ch_cls{
         background: #e4e4e4;
     }
@@ -27,10 +43,15 @@
 </head>
 
 <body>
-  <a class="sel_btn ch_cls" id="a" ><span>打电话</span></a>
+  <div>
+    <text class="text" id='tel'></text>
+    <a class="sel_btn ch_cls" id="a" ><span>拨号</span></a>
+  </div>
   <script>
     var a = document.getElementById('a');
     var tel = getParameter('tel');
+    var text = document.getElementById('tel');
+    text.innerText='号码：'+tel;
     if(tel == null || tel == undefined || tel == ''){
       alert('手机号，有误！');
       document.getElementById('a').remove();
