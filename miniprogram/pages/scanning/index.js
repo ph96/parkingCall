@@ -17,7 +17,6 @@ Page({
   },
 
   onLoad: function() {
-    console.log('a=',this.a())
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -142,7 +141,7 @@ Page({
         // 接下来就可以直接调用微信小程序的api保存到本地或者将这张二维码直接画在海报上面去，看各自需求
       }
     });
-    qrcode.makeCode('tel:'+this.data.inputValue);
+    qrcode.makeCode('https://ph96.github.io/parkingCall/call.html?tel='+this.data.inputValue);
   },
 
  // 获取手机号
@@ -171,10 +170,4 @@ Page({
     })
   },
 
-  a: function getCurrentPageUrl() {
-    const pages = getCurrentPages()
-    const currentPage = pages[pages.length - 1]
-    const url = `/${currentPage.route}`
-    return url
-  }
 })

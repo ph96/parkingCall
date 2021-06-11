@@ -7,7 +7,21 @@
   <a id='a' >打电话<a/>
   <script>
 	var a = document.getElementById('a');
-	a.href='tel:13325331642';
+  var tel = getParameter('tel');
+  a.href='tel:'+ tel;
+  function getParameter(param) {
+    var query = window.location.search;
+    console.log('query=',query);
+    var iLen = param.length;
+    var iStart = query.indexOf(param);
+    if (iStart == -1)
+    　return "";
+    iStart += iLen + 1;
+    var iEnd = query.indexOf("&", iStart);
+    if (iEnd == -1)
+    　return query.substring(iStart);
+    return query.substring(iStart, iEnd);
+  }
   </script>
 </body>
 
