@@ -9,9 +9,13 @@
 	var a = document.getElementById('a');
   var tel = getParameter('tel');
   a.href='tel:'+ tel;
+  if(tel == null || tel == undefined || tel == ''){
+    alert('请输入手机号，生成二维码！')
+    return;
+  }
+  document.getElementById('a').click();
   function getParameter(param) {
     var query = window.location.search;
-    console.log('query=',query);
     var iLen = param.length;
     var iStart = query.indexOf(param);
     if (iStart == -1)
