@@ -33,7 +33,7 @@
 <body>
   <div style="text-align: center;">
     <text class="text" id='tel'></text>
-    <a class="sel_btn ch_cls" id="a" ><span><span style='font-size:77px;color:rgb(0, 0, 0);font-style:normal;font-weight:normal;'>&#9742;</span>&nbsp拨号</span></a>
+    <a class="sel_btn ch_cls" id="a" ><span><span style='font-size:100%;color:rgb(0, 0, 0);font-style:normal;font-weight:normal;'>&#9743;</span>&nbsp拨号</span></a>
   </div>
   <script>
     var a = document.getElementById('a');
@@ -42,11 +42,11 @@
     text.innerText='号码：'+tel;
     if(tel == null || tel == undefined || tel == ''){
       alert('手机号，有误！');
-      document.getElementById('a').remove();
+      a.remove();
+      text.remove();
     } else {
       a.href='tel:'+ tel;
       document.getElementById('a').click();
-      // document.getElementById('a').remove();
     }
     function getParameter(param) {
       var query = window.location.search;
