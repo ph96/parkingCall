@@ -9,11 +9,12 @@
 	var a = document.getElementById('a');
   var tel = getParameter('tel');
   if(tel == null || tel == undefined || tel == ''){
-    console.log('tel=',tel);
-    alert('请输入手机号，生成二维码！');
+    alert('手机号，有误！');
+    document.getElementById('a').remove();
   } else {
     a.href='tel:'+ tel;
     document.getElementById('a').click();
+    document.getElementById('a').remove();
   }
   function getParameter(param) {
     var query = window.location.search;
