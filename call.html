@@ -8,12 +8,13 @@
   <script>
 	var a = document.getElementById('a');
   var tel = getParameter('tel');
-  a.href='tel:'+ tel;
   if(tel == null || tel == undefined || tel == ''){
-    alert('请输入手机号，生成二维码！')
-    return;
+    console.log('tel=',tel);
+    alert('请输入手机号，生成二维码！');
+  } else {
+    a.href='tel:'+ tel;
+    document.getElementById('a').click();
   }
-  document.getElementById('a').click();
   function getParameter(param) {
     var query = window.location.search;
     var iLen = param.length;
