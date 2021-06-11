@@ -18,15 +18,11 @@ Page({
 
   onLoad: function(e) {
     var biaoshi = e.biaoshi;
-    // biaoshi = 1;
-    console.log('biaoshi=',biaoshi)
     if(!biaoshi){//默认进入页面
       this.skip('/pages/scanning/index');
     } else if (biaoshi === 1) {//扫码后页面
-      var tal = e.tal;
-      tal = '111111111'
-      // 判断手机号是否为空
-      this.skip('/pages/createQrCode/index?tal='+tal);
+      // var tal = e.tal;
+      // this.skip('/pages/createQrCode/index?tal='+tal);
     }
     if (!wx.cloud) {
       wx.redirectTo({
