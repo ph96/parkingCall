@@ -43,7 +43,7 @@
   <view class="page-section">
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
-        <input class="weui-input" style="background-color: #ffffff;text-align:center;" type="number" bindinput='setInput' placeholder="输入手机号码" />
+        <input class="weui-input inp" style="background-color: #ffffff;text-align:center;" type="number" bindinput='setInput' placeholder="输入手机号码" />
       </view>
     </view>
   </view>
