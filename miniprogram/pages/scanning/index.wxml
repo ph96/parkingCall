@@ -62,7 +62,7 @@
   </view>
 
   <!-- 二维码 -->
-  <view class="uploader" style="/*text-align:center*/align-items:center;margin-right: 5%;">
+  <view class="uploader" style="align-items:center;margin-right: 5%;">
    <canvas class="canvas-code" canvas-id="myQrcode" bindlongtap='save' style="background:#fff;width: 200px;height: 200px;"/>
   </view>
 

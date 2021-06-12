@@ -14,6 +14,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl'), // 如需尝试获取用户信息可改为false
     inputValue: '',
+    path: null,
   },
 
   onLoad: function() {
@@ -61,7 +62,7 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
+        // console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         wx.navigateTo({
           url: '../userConsole/userConsole',
@@ -96,7 +97,7 @@ Page({
           cloudPath,
           filePath,
           success: res => {
-            console.log('[上传文件] 成功：', res)
+            // console.log('[上传文件] 成功：', res)
 
             app.globalData.fileID = res.fileID
             app.globalData.cloudPath = cloudPath
@@ -130,6 +131,7 @@ Page({
     if(!inputValue || inputValue== ''){
       return;
     }
+    let that = this;
     qrcode = new QRCode('myQrcode',{
       text: '',
       width: 200,
@@ -137,7 +139,8 @@ Page({
       padding: 12, // 生成二维码四周自动留边宽度，不传入默认为0
       correctLevel: QRCode.CorrectLevel.L, // 二维码可辨识度
       callback: (res) => {
-        console.log('res.path=',res.path)
+        // console.log('res.path=',res.path)
+        that.setData({ path: res.path});
         // 接下来就可以直接调用微信小程序的api保存到本地或者将这张二维码直接画在海报上面去，看各自需求
       }
     });
@@ -152,21 +155,71 @@ Page({
     });
   },
   // 长按保存
-  save: function () {
-    console.log('save')
+  save: function (e) {
+    let that = this;
     wx.showActionSheet({
-        itemList: ['保存图片'],
-        success: function (res) {
-            console.log(res.tapIndex)
-            if (res.tapIndex == 0) {
-                qrcode.exportImage(function (path) {
-                    console.log('path=',path)
-                    wx.saveImageToPhotosAlbum({
-                        filePath: path,
-                    })
-                })
+      itemList: ['保存到相册'],
+      success(res) {
+        let url = that.data.path; //e.currentTarget.dataset.url
+        // console.log('url=',url);
+        wx.getSetting({
+          success: (res) => {
+            // console.log(res);
+            if (!res.authSetting['scope.writePhotosAlbum']) {   // 未授权
+              wx.authorize({
+                scope: 'scope.writePhotosAlbum',
+                success: () => {
+                  that.saveImgSuccess(url);
+                },
+                fail: (res) => {
+                  // console.log(res);
+                  wx.showModal({
+                    title: '保存失败',
+                    content: '请开启访问手机相册的权限',
+                    success(res) {
+                      wx.openSetting()
+                    }
+                  })
+                }
+              })
+            } else {  // 已授权
+              that.saveImgSuccess(url);
             }
-        }
+          },
+          fail: (res) => {
+            // console.log(res);
+          }
+        })
+      },
+      fail(res) {
+        // console.log(res.errMsg)
+      }
+    })
+  },
+
+  // 同意授权保存到相册
+  saveImgSuccess(url) {
+    wx.getImageInfo({
+      src: url,  // 通过getImageInfo将src转换成改图片的本地路径，给saveImageToPhotosAlbum使用
+      success: (res) => {
+        // console.log('saveImgSuccess.res=',res)
+        let path = res.path;
+        wx.saveImageToPhotosAlbum({
+          filePath: path,   // filePath路径不能是网络图片路径
+          success: (res) => {
+            // console.log(res);
+            wx.showToast({
+              title: '已保存到相册',
+            })
+          },
+          fail: (res) => {
+            // console.log(res);
+          }
+        })
+      },
+      fail: (res) => {
+        // console.log(res);
+      }
     })
   },
 

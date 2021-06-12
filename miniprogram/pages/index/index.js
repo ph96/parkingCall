@@ -21,8 +21,8 @@ Page({
     if(!biaoshi){//默认进入页面
       this.skip('/pages/scanning/index');
     } else if (biaoshi === 1) {//扫码后页面
-      // var tal = e.tal;
-      // this.skip('/pages/createQrCode/index?tal='+tal);
+      var tal = e.tal;
+      this.skip('/pages/createQrCode/index?tal='+tal);
     }
     if (!wx.cloud) {
       wx.redirectTo({
